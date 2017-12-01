@@ -12,14 +12,16 @@ import ir.hosseinabbasi.mediamonks.data.DataManager;
 import ir.hosseinabbasi.mediamonks.di.ApplicationContext;
 import ir.hosseinabbasi.mediamonks.di.module.ApplicationModule;
 import ir.hosseinabbasi.mediamonks.di.module.NetModule;
+import ir.hosseinabbasi.mediamonks.utils.UtilsComponent;
+import ir.hosseinabbasi.mediamonks.utils.UtilsModule;
 
 /**
  * Created by Dr.jacky on 2017/12/01.
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, NetModule.class})
-public interface ApplicationComponent{
+@Component(modules = {ApplicationModule.class, NetModule.class, UtilsModule.class})
+public interface ApplicationComponent extends NetComponent, UtilsComponent{
 
     void inject(MainApp mainApp);
 

@@ -7,6 +7,10 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import ir.hosseinabbasi.mediamonks.di.ActivityContext;
+import ir.hosseinabbasi.mediamonks.di.PerActivity;
+import ir.hosseinabbasi.mediamonks.ui.main.IMainActivityPresenter;
+import ir.hosseinabbasi.mediamonks.ui.main.IMainActivityView;
+import ir.hosseinabbasi.mediamonks.ui.main.MainActivityPresenter;
 
 /**
  * Created by Dr.jacky on 2017/12/01.
@@ -35,6 +39,13 @@ public class ActivityModule {
     @Provides
     CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
+    }
+
+    @Provides
+    @PerActivity
+    IMainActivityPresenter<IMainActivityView> provideMainActivityPresenter(MainActivityPresenter<IMainActivityView>
+                                                                                   presenter) {
+        return presenter;
     }
 
 }

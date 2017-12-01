@@ -32,12 +32,12 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Observable<List<Album>> getAlbums(int pageNumber, int perPage) {
-        return null;
+        return mApiService.getAlbums(pageNumber, perPage);
     }
 
     @Override
     public Observable<List<Photo>> getPhotos(String albumId) {
-        return null;
+        return mApiService.getPhotos(albumId);
     }
 
 }

@@ -5,4 +5,11 @@ package ir.hosseinabbasi.mediamonks.ui.base;
  */
 
 public interface IBaseView {
+
+    void showLoading();
+
+    void hideLoading();
+
+    boolean isNetworkConnected();
+
 }

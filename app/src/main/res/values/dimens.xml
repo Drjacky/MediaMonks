@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Album Fragment -->
+    <dimen name="album_item_imgThumbnail_minWidthHeight">36dp</dimen>
+    <dimen name="album_item_txtTitle_size">18sp</dimen>
+    <dimen name="album_list_item_txtTitle_size">18sp</dimen>
+
+</resources>

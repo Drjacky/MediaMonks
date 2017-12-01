@@ -3,6 +3,7 @@ package ir.hosseinabbasi.mediamonks.di.component;
 import dagger.Component;
 import ir.hosseinabbasi.mediamonks.di.PerActivity;
 import ir.hosseinabbasi.mediamonks.di.module.ActivityModule;
+import ir.hosseinabbasi.mediamonks.ui.album.AlbumListView;
 import ir.hosseinabbasi.mediamonks.ui.main.MainActivity;
 
 /**
@@ -14,5 +15,6 @@ import ir.hosseinabbasi.mediamonks.ui.main.MainActivity;
 public interface ActivityComponent {
 
     void inject(MainActivity activity);
+    void inject(AlbumListView fragment);
 
 }

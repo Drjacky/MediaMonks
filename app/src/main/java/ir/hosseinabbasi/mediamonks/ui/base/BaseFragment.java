@@ -39,6 +39,24 @@ public class BaseFragment extends Fragment implements IBaseView {
         super.onDetach();
     }
 
+    @Override
+    public void showLoading() {
+        if (mActivity != null) {
+            mActivity.showLoading();
+        }
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mActivity != null) {
+            mActivity.hideLoading();
+        }
+    }
+
+    @Override
+    public boolean isNetworkConnected() {
+        return mActivity != null && mActivity.isNetworkConnected();
+    }
 
     public ActivityComponent getActivityComponent() {
         return mActivity.getActivityComponent();

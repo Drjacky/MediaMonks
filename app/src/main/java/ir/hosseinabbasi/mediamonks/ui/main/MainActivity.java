@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.hosseinabbasi.mediamonks.R;
 import ir.hosseinabbasi.mediamonks.di.ApplicationContext;
+import ir.hosseinabbasi.mediamonks.ui.album.AlbumListView;
 import ir.hosseinabbasi.mediamonks.ui.base.BaseActivity;
 
 /**
@@ -44,6 +45,10 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
     }
 
     private void initViews() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.v_container, AlbumListView.getInstance(), AlbumListView.TAG)
+                .commit();
     }
 
 }

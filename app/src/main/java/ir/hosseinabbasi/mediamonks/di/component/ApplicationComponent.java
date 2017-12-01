@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ir.hosseinabbasi.mediamonks.MainApp;
 import ir.hosseinabbasi.mediamonks.data.DataManager;
 import ir.hosseinabbasi.mediamonks.di.ApplicationContext;
 import ir.hosseinabbasi.mediamonks.di.module.ApplicationModule;
@@ -19,6 +20,8 @@ import ir.hosseinabbasi.mediamonks.di.module.NetModule;
 @Singleton
 @Component(modules = {ApplicationModule.class, NetModule.class})
 public interface ApplicationComponent{
+
+    void inject(MainApp mainApp);
 
     @ApplicationContext
     Context exposeContext();

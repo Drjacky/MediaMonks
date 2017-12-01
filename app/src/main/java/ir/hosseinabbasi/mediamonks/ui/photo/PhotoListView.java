@@ -103,7 +103,7 @@ public class PhotoListView extends BaseFragment implements IPhotoListView {
 
     public void getPhotoList() {
         mPresenter.getPhotoList(mAlbumId, mCurrentPage, mPageSize);
-        mCurrentPage++;
+        mCurrentPage = mCurrentPage + mPageSize;
     }
 
     @Override

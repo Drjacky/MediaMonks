@@ -100,7 +100,7 @@ public class AlbumListView extends BaseFragment implements IAlbumListView {
 
     public void getAlbumList() {
         mPresenter.getAlbumList(mCurrentPage, mPageSize);
-        mCurrentPage++;
+        mCurrentPage = mCurrentPage + mPageSize;
     }
 
     @Override

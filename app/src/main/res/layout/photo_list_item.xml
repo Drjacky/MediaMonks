@@ -22,7 +22,7 @@
       android:textColor="@color/colorAccent"
       android:textSize="@dimen/album_list_item_txtTitle_size"
       android:textStyle="bold"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/photo_list_item_txtId"
       app:layout_constraintStart_toEndOf="@+id/photo_list_item_imgThumbnail"
       app:layout_constraintTop_toTopOf="@+id/photo_list_item_imgThumbnail"
       tools:ignore="UnusedAttribute"
@@ -35,6 +35,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:minHeight="128dp"
@@ -44,5 +45,15 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:layout_constraintLeft_creator="1"
       tools:layout_constraintTop_creator="1" />
+
+  <TextView
+      android:id="@+id/photo_list_item_txtId"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

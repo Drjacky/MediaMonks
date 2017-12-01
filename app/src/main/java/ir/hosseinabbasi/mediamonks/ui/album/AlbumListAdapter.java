@@ -62,6 +62,9 @@ public class AlbumListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.album_list_item_txtTitle)
         TextView title;
 
+        @BindView(R.id.album_list_item_txtId)
+        TextView id;
+
         DataHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -69,6 +72,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         void render(Album albumModel) {
             title.setText(albumModel.getTitle());
+            id.setText(albumModel.getId()+""); //ToDo
             mainRow.setOnClickListener(this);
         }
 

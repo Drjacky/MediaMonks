@@ -83,6 +83,9 @@ public class PhotoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.photo_list_item_imgThumbnail)
         ImageView thumbnail;
 
+        @BindView(R.id.photo_list_item_txtId)
+        TextView id;
+
         DataHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -90,6 +93,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         void render(Photo photoModel) {
             title.setText(photoModel.getTitle());
+            id.setText(photoModel.getId()+""); //ToDo
             mainRow.setOnClickListener(this);
         }
 

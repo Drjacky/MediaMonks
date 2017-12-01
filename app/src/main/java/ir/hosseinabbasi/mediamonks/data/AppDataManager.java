@@ -36,8 +36,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<List<Photo>> getPhotos(String albumId) {
-        return mApiService.getPhotos(albumId);
+    public Observable<List<Photo>> getPhotos(int albumId, int pageNumber, int perPage) {
+        return mApiService.getPhotos(albumId, pageNumber, perPage);
     }
 
 }

@@ -1,10 +1,13 @@
 package ir.hosseinabbasi.mediamonks.data.db.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("com.robohorse.robopojogenerator")
-public class Photo{
+public class Photo implements Parcelable {
 
 	@SerializedName("albumId")
 	private int albumId;
@@ -62,14 +65,49 @@ public class Photo{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"Photo{" + 
-			"albumId = '" + albumId + '\'' + 
-			",id = '" + id + '\'' + 
-			",title = '" + title + '\'' + 
-			",url = '" + url + '\'' + 
-			",thumbnailUrl = '" + thumbnailUrl + '\'' + 
-			"}";
+	public String toString(){
+		return
+				"Photo{" +
+						"albumId = '" + albumId + '\'' +
+						",id = '" + id + '\'' +
+						",title = '" + title + '\'' +
+						",url = '" + url + '\'' +
+						",thumbnailUrl = '" + thumbnailUrl + '\'' +
+						"}";
+	}
+
+	protected Photo(Parcel in) {
+		albumId = in.readInt();
+		id = in.readInt();
+		title = in.readString();
+		url = in.readString();
+		thumbnailUrl = in.readString();
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(albumId);
+		dest.writeInt(id);
+		dest.writeString(title);
+		dest.writeString(url);
+		dest.writeString(thumbnailUrl);
+	}
+
+	@SuppressWarnings("unused")
+	public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+		@Override
+		public Photo createFromParcel(Parcel in) {
+			return new Photo(in);
 		}
+
+		@Override
+		public Photo[] newArray(int size) {
+			return new Photo[size];
+		}
+	};
 }

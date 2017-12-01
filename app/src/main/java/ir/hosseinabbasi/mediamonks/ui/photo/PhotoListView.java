@@ -1,11 +1,10 @@
-package ir.hosseinabbasi.mediamonks.ui.album;
+package ir.hosseinabbasi.mediamonks.ui.photo;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,46 +18,48 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.hosseinabbasi.mediamonks.R;
-import ir.hosseinabbasi.mediamonks.data.db.model.Album;
+import ir.hosseinabbasi.mediamonks.data.db.model.Photo;
 import ir.hosseinabbasi.mediamonks.di.ActivityContext;
 import ir.hosseinabbasi.mediamonks.ui.base.BaseFragment;
+import ir.hosseinabbasi.mediamonks.ui.detail.DetailView;
 import ir.hosseinabbasi.mediamonks.ui.main.MainActivity;
-import ir.hosseinabbasi.mediamonks.ui.photo.PhotoListView;
 
 /**
  * Created by Dr.jacky on 2017/12/01.
  */
 
-public class AlbumListView extends BaseFragment implements IAlbumListView {
+public class PhotoListView extends BaseFragment implements IPhotoListView {
 
-    public static final String TAG = "AlbumListView";
+    public static final String TAG = "PhotoListView";
+
+    private int mAlbumId;
 
     @Inject
     @ActivityContext
     Context mContext;
 
     @Inject
-    AlbumListPresenter<AlbumListView> mPresenter;
+    PhotoListPresenter<PhotoListView> mPresenter;
 
-    @BindView(R.id.fragment_album_rcyAlbum)
-    RecyclerView mRcyAlbum;
+    @BindView(R.id.fragment_photo_rcyPhoto)
+    RecyclerView mRcyPhoto;
 
-    private AlbumListAdapter adapter;
+    private PhotoListAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     private boolean mIsRecyclerViewLoading = false;
     private boolean mBottomReached = false;
     private int mCurrentPage = 0;
-    private int mPageSize = 20;
-    private int mTotal = 100;
-    private List<Album> mAlbumList = new ArrayList<>();
+    private int mPageSize = 10;
+    private int mTotal = 50;
+    private List<Photo> mPhotoList = new ArrayList<>();
 
-    public static AlbumListView getInstance() {
-        return new AlbumListView();
+    public static PhotoListView getInstance() {
+        return new PhotoListView();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_album, container, false);
+        View view = inflater.inflate(R.layout.fragment_photo, container, false);
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this, view));
         mPresenter.onAttach(this);
@@ -78,42 +79,45 @@ public class AlbumListView extends BaseFragment implements IAlbumListView {
     }
 
     private void initViews() {
+        Bundle bundle = this.getArguments();
+        mAlbumId = bundle.getInt("albumId");
         mLayoutManager = new LinearLayoutManager(mContext);
-        mRcyAlbum.setLayoutManager(mLayoutManager);
-        mRcyAlbum.setHasFixedSize(true);
-        mRcyAlbum.addOnScrollListener(recyclerViewOnScrollListener);
-        adapter = new AlbumListAdapter(mContext, this);
-        mRcyAlbum.setAdapter(adapter);
+        mRcyPhoto.setLayoutManager(mLayoutManager);
+        mRcyPhoto.setHasFixedSize(true);
+        mRcyPhoto.addOnScrollListener(recyclerViewOnScrollListener);
+        adapter = new PhotoListAdapter(mContext, this);
+        mRcyPhoto.setAdapter(adapter);
 
         if(isNetworkConnected())
-            getAlbumList();
+            getPhotoList();
         else
             Toast.makeText(mContext, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void loadAlbumList(List<Album> albumList) {
-        mAlbumList = albumList;
-        adapter.addAll(mAlbumList);
+    public void loadPhotoList(List<Photo> photoList) {
+        mPhotoList = photoList;
+        adapter.addAll(mPhotoList);
         adapter.notifyDataSetChanged();
     }
 
-    public void getAlbumList() {
-        mPresenter.getAlbumList(mCurrentPage, mPageSize);
+    public void getPhotoList() {
+        mPresenter.getPhotoList(mAlbumId, mCurrentPage, mPageSize);
         mCurrentPage++;
     }
 
     @Override
-    public void loadAlbumDetail(int albumId) {
+    public void loadPhotoDetail(Photo photo) {
         Bundle bundle = new Bundle();
-        bundle.putInt("albumId", albumId);
-        PhotoListView photoListFragment = PhotoListView.getInstance();
-        photoListFragment.setArguments(bundle);
+        bundle.putParcelable("photo", photo);
+        DetailView detailFragment = DetailView.getInstance();
+        detailFragment.setArguments(bundle);
 
         ((MainActivity) mContext).getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.v_container, photoListFragment, PhotoListView.TAG)
-                .addToBackStack(PhotoListView.TAG)
+                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                .add(R.id.v_container, detailFragment, DetailView.TAG)
+                .addToBackStack(DetailView.TAG)
                 .commit();
     }
 
@@ -136,7 +140,7 @@ public class AlbumListView extends BaseFragment implements IAlbumListView {
 
                 if (!isRecyclerViewLoading()) {
                     if (((mVisibleItemCount + mFirstVisibleItemPosition) >= mTotalItemCount) && mBottomReached && (mTotalItemCount < mTotal)) {
-                        getAlbumList();
+                        getPhotoList();
                     }
                 }
             }

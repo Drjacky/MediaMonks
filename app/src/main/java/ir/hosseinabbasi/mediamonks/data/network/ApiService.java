@@ -18,6 +18,6 @@ public interface ApiService {
     Observable<List<Album>> getAlbums(@Query("_start") int pageNumber, @Query("_limit") int perPage);
 
     @GET("photos")
-    Observable<List<Photo>> getPhotos(@Query("albumId") String albumId);
+    Observable<List<Photo>> getPhotos(@Query("albumId") int albumId, @Query("_start") int pageNumber, @Query("_limit") int perPage);
 
 }

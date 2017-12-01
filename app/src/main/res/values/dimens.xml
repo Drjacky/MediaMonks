@@ -5,4 +5,8 @@
     <dimen name="album_item_txtTitle_size">18sp</dimen>
     <dimen name="album_list_item_txtTitle_size">18sp</dimen>
 
+    <!-- Detail Fragment -->
+    <dimen name="fragment_detail_photo_height">50dp</dimen>
+    <dimen name="fragment_detail_txtTitle_size">12sp</dimen>
+
 </resources>

@@ -75,6 +75,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             Album album = allData.get(this.getLayoutPosition());
+            mListener.loadAlbumDetail(album.getId());
         }
 
     }

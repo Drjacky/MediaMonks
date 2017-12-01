@@ -13,7 +13,7 @@ public interface IAlbumListView extends IBaseView{
 
     void loadAlbumList(List<Album> albumList);
 
-    void loadAlbumDetail(Album album);
+    void loadAlbumDetail(int albumId);
 
     void setIsLoading(Boolean isLoading);
 

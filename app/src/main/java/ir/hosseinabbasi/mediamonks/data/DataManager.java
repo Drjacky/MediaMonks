@@ -17,6 +17,6 @@ public interface DataManager extends ApiService {
     Observable<List<Album>> getAlbums(int pageNumber, int perPage);
 
     @Override
-    Observable<List<Photo>> getPhotos(String albumId);
+    Observable<List<Photo>> getPhotos(int albumId, int pageNumber, int perPage);
 
 }
